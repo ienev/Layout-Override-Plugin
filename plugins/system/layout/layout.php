@@ -18,9 +18,10 @@ class plgSystemLayout extends JPlugin
     {
         /** Set criteria for the View you want to override */
         if ((int)$this->params->get('override_front_archive', 1) && JFactory::getApplication()->getName() == 'site'
-            && JFactory::getApplication()->input->get('option', '', 'cmd') == 'com_content'
-            && JFactory::getApplication()->input->get('view', '', 'cmd') == 'archive'
-            && JFactory::getApplication()->input->get('layout', 'default', 'cmd') == 'default'
+            && ( (strpos(JURI::getInstance()->toString(), 'content/archive') !== false)
+				||(JFactory::getApplication()->input->get('option', '', 'cmd') == 'com_content'
+				&& JFactory::getApplication()->input->get('view', '', 'cmd') == 'archive'
+				&& JFactory::getApplication()->input->get('layout', 'default', 'cmd') == 'default'))
         ) {
 			
             /** Override JRequest View and Layout - register the view (example in the layout/com_content folder) */
